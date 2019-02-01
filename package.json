@@ -1,0 +1,19 @@
+{
+  "name": "easemqtt",
+  "version": "0.1.0",
+  "description": "EaseMqtt was developed out of the need of a sane approach to developing services that communicate using MQTT.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Isolated-/easemqtt.git"
+  },
+  "author": "Michael Palmer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Isolated-/easemqtt/issues"
+  },
+  "homepage": "https://github.com/Isolated-/easemqtt#readme"
+}
