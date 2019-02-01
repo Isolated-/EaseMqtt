@@ -1,0 +1,1 @@
+export { EaseError } from './EaseError';
