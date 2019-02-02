@@ -1,6 +1,6 @@
 {
   "name": "easemqtt",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "EaseMqtt was developed out of the need of a sane approach to developing services that communicate using MQTT.",
   "main": "dist/index.js",
   "scripts": {
@@ -8,6 +8,7 @@
     "test:lint": "tslint ./lib/**/*.ts",
     "test:unit": "jest ./test/unit",
     "test:e2e": "jest ./test/e2e --detectOpenHandles --forceExit",
+    "prepublish": "npm run build",
     "build": "npm test && tsc"
   },
   "repository": {
