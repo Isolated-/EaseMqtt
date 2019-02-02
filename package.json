@@ -7,7 +7,7 @@
     "test": "npm run test:lint && npm run test:unit && npm run test:e2e",
     "test:lint": "tslint ./lib/**/*.ts",
     "test:unit": "jest ./test/unit",
-    "test:e2e": "jest ./test/e2e",
+    "test:e2e": "jest ./test/e2e --detectOpenHandles --forceExit",
     "build": "npm test && tsc"
   },
   "repository": {

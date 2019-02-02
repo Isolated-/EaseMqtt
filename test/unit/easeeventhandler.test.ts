@@ -104,7 +104,7 @@ test('handleMessage: should not throw error: null message', () => {
 
 test('handleMessage: should not throw error: empty message', () => {
   const handler = getHandler();
-  expect(() => handler.handleMessage('topic', new Buffer(''))).not.toThrow();
+  expect(() => handler.handleMessage('topic', Buffer.from(''))).not.toThrow();
 });
 
 /**
