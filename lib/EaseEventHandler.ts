@@ -1,5 +1,12 @@
 import { Packet } from 'mqtt';
-import { IEaseMqtt, IEaseEventHandler } from '.';
+import {
+  IEaseMqtt,
+  IEaseEventHandler,
+  IEaseRequest,
+  EaseRequest,
+  EaseResponse } from '.';
+
+import { isEmpty, translateTopic, decode } from './Util';
 
 export class EaseEventHandler implements IEaseEventHandler {
   constructor (public mqtt?: IEaseMqtt, public prefix?: string) {
@@ -7,7 +14,12 @@ export class EaseEventHandler implements IEaseEventHandler {
 
     if (mqtt && mqtt.client) {
       const client = mqtt.client;
-      client.on('error', this.handleError);
+
+      client.on('connect', () => this.handleConnect());
+      client.on('error', error => this.handleError(error));
+      client.on('packetreceive', packet => this.handlePacket(packet));
+      client.on('packetsend', packet => this.handlePacket(packet));
+      client.on('message', (t, p, pack) => this.handleMessage(t, p, pack));
     }
   }
 
@@ -17,21 +29,55 @@ export class EaseEventHandler implements IEaseEventHandler {
    *  @param {Buffer} msgbuf the encoded message content
    *  @param {Packet} packet the original message packet
    */
-  public handleMessage(topic: string, msgbuf: Buffer, packet?: Packet) {}
+  public handleMessage(path: string, msgbuf: Buffer, packet?: Packet): IEaseRequest {
+    if (isEmpty(path) || isEmpty(msgbuf) || isEmpty(packet)) return;
+
+    const delimiter = this.mqtt.option.delimiter;
+    const topic = translateTopic(path, '/', delimiter) as string;
+    const message = decode(msgbuf);
+
+    const request: IEaseRequest = {
+      topic,
+      body: message,
+    };
+
+    if (request.body.replyTo) {
+      request.replyTo = translateTopic(request.body.replyTo, '/', delimiter) as string;
+      delete request.body.replyTo;
+    }
+
+    request.mqtt = this.mqtt;
+
+    const req = new EaseRequest(request);
+    const res = new EaseResponse(req);
+
+    this.mqtt.emit(topic, req, res);
+    return req;
+  }
 
   /**
    *  Handle an MQTT Error
    *  @param {Error} error the error object
    *  @return {void}
    */
-  public handleError(error: Error): void {}
+  public handleError(error: Error): void {
+    this.emit('error', error);
+  }
 
   /**
    *  Handle an incoming/outgoing packet
    *  @param {Packet} packet the incoming/outgoing packet
    *  @return {void}
    */
-  public handlePacket(packet: Packet): void {}
+  public handlePacket(packet: Packet): void {
+    if (isEmpty(packet)) return;
+
+    if (packet.cmd === 'disconnect') {
+      return this.handleDisconnect();
+    }
+
+    this.emit('packet', packet);
+  }
 
   /**
    *  Handle the connection event

@@ -10,7 +10,7 @@ import {
   EaseEventHandler,
 } from '.';
 
-import { isEmpty } from './Util';
+import { isEmpty, translateTopic, encode } from './Util';
 
 export class EaseMqtt extends EventEmitter2 implements IEaseMqtt {
 
@@ -45,6 +45,12 @@ export class EaseMqtt extends EventEmitter2 implements IEaseMqtt {
 
     if (client) {
       this.client = client;
+
+      const subscribe = this.option.subscribe;
+
+      if (subscribe.length > 0) {
+        this.subscribe(subscribe);
+      }
     }
 
     this.eventHandler = new EaseEventHandler(this);
@@ -85,6 +91,21 @@ export class EaseMqtt extends EventEmitter2 implements IEaseMqtt {
         return reject(new EaseError('MqttClientUndefined', 'No mqtt client has been provided'));
       }
 
+      const topics = typeof (topic) === 'string' ? [topic] : topic;
+      const delimiter = this.option.delimiter;
+      const encoded = encode(message);
+      const opt = { qos };
+
+      topics.forEach((chan, idx) => {
+        const topic = translateTopic(chan, delimiter, '/') as string;
+
+        const callback = (error, packet) => {
+          if (error) return reject(error);
+          if (idx > topics.length) return resolve(packet.messageId);
+        };
+
+        mqtt.publish(topic, encoded, opt, callback);
+      });
     });
   }
 
@@ -103,6 +124,18 @@ export class EaseMqtt extends EventEmitter2 implements IEaseMqtt {
       if (isEmpty(mqtt)) {
         return reject(new EaseError('MqttClientUndefined', 'No mqtt client has been provided'));
       }
+
+      const quality = qos || this.option.qos;
+      const opt = { qos: quality };
+      const delimiter = this.option.delimiter;
+      const channel = translateTopic(topic, delimiter, '/');
+
+      const callback = (err) => {
+        if (err) return reject(err);
+        return resolve();
+      };
+
+      mqtt.subscribe(channel, opt, callback);
     });
   }
 

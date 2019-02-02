@@ -4,7 +4,7 @@ import { isEmpty } from './isEmpty';
 /**
  *  Decode the content of an encoded message
  *  @param {Buffer} msgbuf the encoded message
- *  @return {string | IEaseMessage}
+ *  @return {IEaseMsg}
  */
 export const decode = (msgbuf: Buffer): IEaseMsg => {
   if (isEmpty(msgbuf)) {

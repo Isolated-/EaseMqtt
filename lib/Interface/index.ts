@@ -5,4 +5,6 @@ export {
   IEaseMqtt,
   IEaseError,
   IEaseEventHandler,
+  IEaseRequest,
+  IEaseResponse,
 } from './Implementation';

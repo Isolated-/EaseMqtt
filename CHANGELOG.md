@@ -14,3 +14,4 @@
     - Method: `publish(topic, message, qos)` - publish a message to topic(s)
     - Method: `subscribe(topic, qos)` - subscribe to multiple topic(s)
     - Method: `end()` - end the `MqttClient` connection
+- Class: `EaseEventEmitter` - handles events from `MqttClient`
