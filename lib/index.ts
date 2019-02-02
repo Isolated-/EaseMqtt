@@ -14,6 +14,7 @@ export {
   IEaseError,
   IEaseMqtt,
   IEaseMessage,
+  IEaseMsg,
   IEaseOption,
 } from './Interface';
 

@@ -6,3 +6,5 @@ export interface IEaseMessage {
     | Date | Date[]
     | IEaseMessage | IEaseMessage[];
 }
+
+export type IEaseMsg = string | IEaseMessage | any[];

@@ -1,7 +1,7 @@
-import { IEaseMessage, EaseError } from '..';
+import { IEaseMsg, EaseError } from '..';
 import { isEmpty } from './isEmpty';
 
-export const encode = (message: string | IEaseMessage | any[]): Buffer => {
+export const encode = (message: IEaseMsg): Buffer => {
   if (isEmpty(message)) {
     throw new EaseError(
       'EncodeInvalidMessage',

@@ -1,7 +1,14 @@
 import { EventEmitter2 } from 'eventemitter2';
 import { QoS, MqttClient } from 'mqtt';
 
-import { IEaseMqtt, IEaseMessage, IEaseOption } from './';
+import {
+  IEaseMqtt,
+  IEaseMsg,
+  IEaseOption,
+  EaseError,
+} from '.';
+
+import { isEmpty } from './Util';
 
 export class EaseMqtt extends EventEmitter2 implements IEaseMqtt {
 
@@ -21,16 +28,17 @@ export class EaseMqtt extends EventEmitter2 implements IEaseMqtt {
    *  @param {IEaseOption} opt optional option object
    */
   constructor (client?: MqttClient, opt?: IEaseOption) {
+    const option = opt || {};
     super({
-      wildcard: opt.wildcard || false,
-      delimiter: opt.delimiter || '.',
+      wildcard: option.wildcard || false,
+      delimiter: option.delimiter || '.',
     });
+
+    this.option = this.getDefault(option);
 
     if (client) {
       this.client = client;
     }
-
-    this.option = this.getDefault(opt);
   }
 
   /**
@@ -55,8 +63,20 @@ export class EaseMqtt extends EventEmitter2 implements IEaseMqtt {
    *  @param {IEaseMessage} message the unencoded message content
    *  @param {QoS} qos override the default qos
    */
-  public publish (topic: string | string[], message: IEaseMessage, qos?: QoS): Promise<number> {
-    return null;
+  public publish (topic: string | string[], message: IEaseMsg, qos?: QoS): Promise<number> {
+    return new Promise((resolve, reject) => {
+      if (isEmpty(topic) || isEmpty(message)) {
+        const errorName = isEmpty(topic) ? 'TopicNameEmpty' : 'MessageContentEmpty';
+        const errorMessage = isEmpty(topic) ? 'topic name too short' : 'message content too short';
+        return reject(new EaseError(errorName, errorMessage));
+      }
+
+      const mqtt = this.client;
+      if (isEmpty(mqtt)) {
+        return reject(new EaseError('MqttClientUndefined', 'No mqtt client has been provided'));
+      }
+
+    });
   }
 
   /**
@@ -65,11 +85,26 @@ export class EaseMqtt extends EventEmitter2 implements IEaseMqtt {
    *  @param {QoS} qos override the default qos
    */
   public subscribe (topic: string | string[], qos?: QoS): Promise<void> {
-    return;
+    return new Promise((resolve, reject) => {
+      if (isEmpty(topic)) {
+        return reject(new EaseError('TopicNameEmpty', 'topic name too short'));
+      }
+
+      const mqtt = this.client;
+      if (isEmpty(mqtt)) {
+        return reject(new EaseError('MqttClientUndefined', 'No mqtt client has been provided'));
+      }
+    });
   }
 
   /**
    *  Terminate the connected client and handle clean up.
    */
-  public end(): void {}
+  public end(): void {
+    const mqtt = this.client;
+
+    if (mqtt) {
+      mqtt.end();
+    }
+  }
 }

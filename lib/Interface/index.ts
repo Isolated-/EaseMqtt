@@ -1,4 +1,4 @@
-export { IEaseMessage } from './IEaseMessage';
+export { IEaseMessage, IEaseMsg } from './IEaseMessage';
 export { IEaseOption } from './IEaseOption';
 
 export {

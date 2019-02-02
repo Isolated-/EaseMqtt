@@ -1,5 +1,7 @@
 # EaseMqtt - Documentation
 
+[![Build Status](https://travis-ci.org/Isolated-/EaseMqtt.svg?branch=master)](https://travis-ci.org/Isolated-/EaseMqtt)
+
 *Current Version: **v0.1.0***
 
 I developed EaseMqtt from the need of a simpler approach to developing services that communicate via MQTT, and also an extension to the existing functionality of the `mqtt` package.
