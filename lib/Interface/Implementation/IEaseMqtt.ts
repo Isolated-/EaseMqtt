@@ -1,7 +1,18 @@
-import { QoS } from 'mqtt';
+import { QoS, MqttClient } from 'mqtt';
 import { IEaseMessage } from '..';
+import { IEaseOption } from '../IEaseOption';
 
 export interface IEaseMqtt {
+
+  /**
+   *  @param {MqttClient} client holds the configured client
+   */
+  client: MqttClient;
+
+  /**
+   *  @param {IEaseOption} option holds the option object
+   */
+  option: IEaseOption;
 
   /**
    *  Publish a message to topic(s) returning the message id.

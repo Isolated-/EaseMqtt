@@ -4,7 +4,7 @@
   "description": "EaseMqtt was developed out of the need of a sane approach to developing services that communicate using MQTT.",
   "main": "dist/index.js",
   "scripts": {
-    "test": "npm run test:lint && npm run test:unit && npm run test:e2e",
+    "test": "npm run test:lint && npm run test:unit",
     "test:lint": "tslint ./lib/**/*.ts",
     "test:unit": "jest ./test/unit",
     "test:e2e": "jest ./test/e2e",
