@@ -15,3 +15,12 @@
     - Method: `subscribe(topic, qos)` - subscribe to multiple topic(s)
     - Method: `end()` - end the `MqttClient` connection
 - Class: `EaseEventEmitter` - handles events from `MqttClient`
+- Class: `EaseRequest`
+- Class: `EaseResponse`
+- Util: `encode` - message encoding for `mqtt` transporting
+- Util: `decode` - decode a message into a readable format
+- Util: `translateTopic` - translate a topic using different delimiters
+- Util: `getOptionDefaults` - helper function for populating defaults
+- Integration: `TravisCI` - automated integration and testing.
+- Integration: `Jest` - Unit and integration testing
+- Integration: `tslint` - a linting package for ensuring consistant syntax
