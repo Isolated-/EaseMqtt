@@ -6,3 +6,5 @@ cache:
     - node_modules
 install:
   - npm install
+env:
+  - MQTT_TEST_BROKER="test.mosquitto.org"
