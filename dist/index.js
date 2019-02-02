@@ -1,5 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var mqtt_1 = require("mqtt");
+exports.connect = mqtt_1.connect;
 var Error_1 = require("./Error");
 exports.EaseError = Error_1.EaseError;
 var EaseEventHandler_1 = require("./EaseEventHandler");

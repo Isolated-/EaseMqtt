@@ -4,6 +4,12 @@
 
 *Version: **0.1.0***
 
+# Version [0.1.1] - 2019-02-02
+
+### Added
+
+- Export: `connect` is exported for convience
+
 # Version [0.1.0] - 2019-02-01
 
 ### Added

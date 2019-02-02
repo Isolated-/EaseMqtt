@@ -1,6 +1,6 @@
 {
   "name": "easemqtt",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "EaseMqtt was developed out of the need of a sane approach to developing services that communicate using MQTT.",
   "main": "dist/index.js",
   "scripts": {

@@ -42,8 +42,7 @@ npm test
 The main difference in implementation is `mqtt` uses a slash `/` delimiter, by default `EaseMqtt` uses a dot `.` delimiter, of course this can be overriden by providing a `delimiter` property to the `EaseMqtt` constructor. It's also possible to use wildcards in the topic name, by default this is disabled but can be enabled with the `wildcard` property.
 
 ```javascript
-import { connect } from 'mqtt';
-import { EaseMqtt } from 'easemqtt';
+import { connect, EaseMqtt } from 'easemqtt';
 
 const client = connect('mqtt://localhost');
 const easemqtt = new EaseMqtt(client);
