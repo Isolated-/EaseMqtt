@@ -5,7 +5,9 @@ import {
   IEaseMqtt,
   IEaseMsg,
   IEaseOption,
+  IEaseEventHandler,
   EaseError,
+  EaseEventHandler,
 } from '.';
 
 import { isEmpty } from './Util';
@@ -21,6 +23,11 @@ export class EaseMqtt extends EventEmitter2 implements IEaseMqtt {
    *  @param {IEaseOption} option holds the collection of options
    */
   public option: IEaseOption;
+
+  /**
+   *  @param {IEaseEventHandler} eventHandler handles conversion from mqtt events
+   */
+  eventHandler: IEaseEventHandler;
 
   /**
    *  Create the EaseMqtt instance
@@ -39,6 +46,8 @@ export class EaseMqtt extends EventEmitter2 implements IEaseMqtt {
     if (client) {
       this.client = client;
     }
+
+    this.eventHandler = new EaseEventHandler(this);
   }
 
   /**

@@ -6,6 +6,14 @@ export interface IEaseEventHandler {
   prefix?: string;
 
   /**
+   *  Handle an incoming message
+   *  @param {string} topic the topic the message came on
+   *  @param {Buffer} msgbuf the encoded message content
+   *  @param {Packet} packet the original message packet
+   */
+  handleMessage(topic: string, msgbuf: Buffer, packet: Packet);
+
+  /**
    *  Handle an MQTT Error
    *  @param {Error} error the error object
    *  @return {void}

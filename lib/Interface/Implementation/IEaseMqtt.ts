@@ -1,7 +1,6 @@
 import { QoS, MqttClient } from 'mqtt';
-import { IEaseOption } from '../IEaseOption';
 import { EventEmitter2 } from 'eventemitter2';
-import { IEaseMsg } from '..';
+import { IEaseMsg, IEaseEventHandler, IEaseOption } from '..';
 
 export interface IEaseMqtt extends EventEmitter2 {
 
@@ -14,6 +13,11 @@ export interface IEaseMqtt extends EventEmitter2 {
    *  @param {IEaseOption} option holds the option object
    */
   option: IEaseOption;
+
+  /**
+   *  @param {IEaseEventHandler} eventHandler handles conversion from mqtt events
+   */
+  eventHandler: IEaseEventHandler;
 
   /**
    *  Publish a message to topic(s) returning the message id.
