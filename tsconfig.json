@@ -4,9 +4,9 @@
     "module": "commonjs",
     "outDir": "./dist",
     "declaration": true,
+    "declarationDir": "./dist",
     "pretty": true,
     "removeComments": true,
-    "declarationDir": "./dist/declaration",
   },
   "include": [
     "./lib/**/*.ts"
