@@ -1,8 +1,9 @@
 import { QoS, MqttClient } from 'mqtt';
-import { IEaseMessage } from '..';
 import { IEaseOption } from '../IEaseOption';
+import { EventEmitter2 } from 'eventemitter2';
+import { IEaseMsg } from '..';
 
-export interface IEaseMqtt {
+export interface IEaseMqtt extends EventEmitter2 {
 
   /**
    *  @param {MqttClient} client holds the configured client
@@ -17,10 +18,10 @@ export interface IEaseMqtt {
   /**
    *  Publish a message to topic(s) returning the message id.
    *  @param {string | string[]} topic the topic name(s)
-   *  @param {IEaseMessage} message the unencoded message content
+   *  @param {IEaseMsg} message the unencoded message content
    *  @param {QoS} qos override the default qos
    */
-  publish (topic: string, message: IEaseMessage, qos?: QoS): Promise<number>;
+  publish (topic: string, message: IEaseMsg, qos?: QoS): Promise<number>;
 
   /**
    *  Subscribe to topic(s) in order to receive published messages.

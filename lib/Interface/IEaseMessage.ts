@@ -1,4 +1,5 @@
 export interface IEaseMessage {
+  messageId?: number;
   [key: string]:
     string | string[]
     | number | number[]

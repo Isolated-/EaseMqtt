@@ -4,4 +4,5 @@ export { IEaseOption } from './IEaseOption';
 export {
   IEaseMqtt,
   IEaseError,
+  IEaseEventHandler,
 } from './Implementation';

@@ -12,10 +12,12 @@ export { EaseError } from './Error';
 // interfaces
 export {
   IEaseError,
+  IEaseEventHandler,
   IEaseMqtt,
   IEaseMessage,
   IEaseMsg,
   IEaseOption,
 } from './Interface';
 
+export { EaseEventHandler } from './EaseEventHandler';
 export { EaseMqtt } from './EaseMqtt';
