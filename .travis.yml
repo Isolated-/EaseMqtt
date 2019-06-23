@@ -1,10 +1,19 @@
 language: node_js
 node_js:
-  - 10
+- 10
+- 8
 cache:
   directories:
-    - node_modules
+  - node_modules
 install:
-  - yarn install
+- yarn install
 env:
-  - MQTT_TEST_BROKER="test.mosquitto.org"
+- MQTT_TEST_BROKER="test.mosquitto.org"
+deploy:
+  provider: npm
+  email: michaelpalmer53@gmail.com
+  api_key:
+    secure: U0tBBRUOyqeVzRdSKU8ONxcXKgrSc46B568TEI/5cHYeDK6ZJzG/Tl/Lcab6vBSDP4u96SHPm4yLvuBZtaR7pcv9Fh8BP21Ra/DUm6k6o24Qt83ZTsOxec5vSCWJZLOgJCjExDZ1qrjWasgbNNV9/fXuS87tdwH4/32kTbbu/bvO+mieOIlyL9r+NHN/HxkwAlRQ56k8RsqAzUFrDfct+BvP/oifuQAyMkSElpTzVVd6ZsCHb6kq3bHvtacKVLvf8wOzyfkflgt2hWfHbgGt7O/ErGbKPJWICqH4SopBXbaRrGRIOiac2uE/fRkqU3HxNFGSTSGp+AoXONeh0Yovhm4qh41Nuzzk/YPFpG3/AuLx+NpW50RqsNsMCHa5EJ3HBfN29CC7PWKTxiNKXjGcBXnl71sMIqGBRud7Af8wr4Da8r12sYiiZ1tN06Sx+cfm1QLkRu2p5iLa+ks/v+wRM1P821ak4lrlz8r8ZXPXh6SHj4Jgr2JMNIxVUE2WjiGzJH3ltnlpv1t0E9f77m1MY8Hsh6fKJ/tRqO7ykOjVbw28KJ09IyHbiUK5lwoNTDwx6bXB6q+0pneLglCjR7i5Km0rwIdY3yudu3seCT2x0vh4KtxyxnHK4YJw4AidqimqEuzJ99WVBmcVD7ZzcgG5IgfsaJYFg7UDsN7CHJBPPWU=
+  on:
+    tags: true
+    repo: Isolated-/EaseMqtt
