@@ -38,7 +38,7 @@ export class EaseResponse implements IEaseResponse {
     const mqtt = this.request.mqtt;
 
     if (mqtt && replyTo) {
-      mqtt.publish(replyTo, message, qos);
+      mqtt.publish(replyTo, message, qos || mqtt.option.qos);
     }
   }
 }
