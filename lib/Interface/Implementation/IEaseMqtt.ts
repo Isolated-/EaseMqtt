@@ -1,4 +1,4 @@
-import { QoS, MqttClient } from 'mqtt';
+import { IMqttClient, QoS } from 'async-mqtt';
 import { EventEmitter2 } from 'eventemitter2';
 import { IEaseMsg, IEaseEventHandler, IEaseOption } from '..';
 
@@ -7,7 +7,7 @@ export interface IEaseMqtt extends EventEmitter2 {
   /**
    *  @param {MqttClient} client holds the configured client
    */
-  client: MqttClient;
+  client: IMqttClient;
 
   /**
    *  @param {IEaseOption} option holds the option object
