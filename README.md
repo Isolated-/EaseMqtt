@@ -4,7 +4,7 @@
 
 **NOTE**: This package is not yet production ready, use in experimenting.
 
-*Version: **0.1.0***
+*Version: **0.2.0-alpha***
 
 `EaseMqtt` was developed out of the need of a sane approach to developing services that communicate using `MQTT`.
 
