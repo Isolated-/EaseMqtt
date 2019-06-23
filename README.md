@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/Isolated-/EaseMqtt.svg?branch=master)](https://travis-ci.org/Isolated-/EaseMqtt)
 
+**NOTE**: This package is not yet production ready, use in experimenting.
+
 *Version: **0.1.0***
 
 `EaseMqtt` was developed out of the need of a sane approach to developing services that communicate using `MQTT`.
@@ -42,8 +44,7 @@ npm test
 The main difference in implementation is `mqtt` uses a slash `/` delimiter, by default `EaseMqtt` uses a dot `.` delimiter, of course this can be overriden by providing a `delimiter` property to the `EaseMqtt` constructor. It's also possible to use wildcards in the topic name, by default this is disabled but can be enabled with the `wildcard` property.
 
 ```javascript
-import { connect } from 'mqtt';
-import { EaseMqtt } from 'easemqtt';
+import { connect, EaseMqtt } from 'easemqtt';
 
 const client = connect('mqtt://localhost');
 const easemqtt = new EaseMqtt(client);

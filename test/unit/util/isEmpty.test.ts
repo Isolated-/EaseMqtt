@@ -24,10 +24,6 @@ test('should return false as string isn\'t empty', () => {
   expect(isEmpty('not empty')).toBeFalsy();
 });
 
-test('should return false as object isn\'t empty', () => {
-  expect(isEmpty({ some: 'data' })).toBeFalsy();
-});
-
 test('should return false as array isn\'t empty', () => {
   expect(isEmpty(['item', 'item', 'item'])).toBeFalsy();
 });

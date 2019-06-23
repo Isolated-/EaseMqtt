@@ -2,7 +2,19 @@
 
 [![Build Status](https://travis-ci.org/Isolated-/EaseMqtt.svg?branch=master)](https://travis-ci.org/Isolated-/EaseMqtt)
 
-*Version: **0.1.0***
+*Version: **0.1.3***
+
+# Version [0.1.3] - 2019-06-23
+
+### Fixes
+
+- Security issues caused by outdated dependencies
+
+# Version [0.1.1] - 2019-02-02
+
+### Added
+
+- Export: `connect` is exported for convience
 
 # Version [0.1.0] - 2019-02-01
 
@@ -15,3 +27,12 @@
     - Method: `subscribe(topic, qos)` - subscribe to multiple topic(s)
     - Method: `end()` - end the `MqttClient` connection
 - Class: `EaseEventEmitter` - handles events from `MqttClient`
+- Class: `EaseRequest`
+- Class: `EaseResponse`
+- Util: `encode` - message encoding for `mqtt` transporting
+- Util: `decode` - decode a message into a readable format
+- Util: `translateTopic` - translate a topic using different delimiters
+- Util: `getOptionDefaults` - helper function for populating defaults
+- Integration: `TravisCI` - automated integration and testing.
+- Integration: `Jest` - Unit and integration testing
+- Integration: `tslint` - a linting package for ensuring consistant syntax
