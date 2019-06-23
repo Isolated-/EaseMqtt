@@ -2,7 +2,13 @@
 
 [![Build Status](https://travis-ci.org/Isolated-/EaseMqtt.svg?branch=master)](https://travis-ci.org/Isolated-/EaseMqtt)
 
-*Version: **0.1.0***
+*Version: **0.1.3***
+
+# Version [0.1.3] - 2019-06-23
+
+### Fixes
+
+- Security issues caused by outdated dependencies
 
 # Version [0.1.1] - 2019-02-02
 
