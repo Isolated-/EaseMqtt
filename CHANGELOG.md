@@ -4,6 +4,12 @@
 
 *Version: **0.2.0-alpha***
 
+# Version [0.2.0] - 2019-06-24
+
+### Added
+
+- `async-mqtt` is now used as a wrapper around `mqtt`
+
 # Version [0.1.3] - 2019-06-23
 
 ### Fixes
