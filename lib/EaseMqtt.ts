@@ -52,7 +52,8 @@ export class EaseMqtt extends EventEmitter2 implements IEaseMqtt {
       }
     }
 
-    this.eventHandler = new EaseEventHandler(this);
+    const easeMqtt = this;
+    this.eventHandler = new EaseEventHandler(easeMqtt);
   }
 
   /**
