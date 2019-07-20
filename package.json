@@ -8,7 +8,7 @@
     "test:lint": "tslint ./lib/**/*.ts",
     "test:unit": "jest ./test/unit",
     "prepare": "npm run build",
-    "build": "npm test && tsc"
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
