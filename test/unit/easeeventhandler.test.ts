@@ -79,17 +79,17 @@ test('handleError: should not throw an error (valid)', () => {
  */
 test('handleMessage: should not throw error: undefined topic', () => {
   const handler = getHandler();
-  expect(() => handler.handleMessage(undefined, new Buffer('hello'))).not.toThrow();
+  expect(() => handler.handleMessage(undefined, Buffer.from('hello'))).not.toThrow();
 });
 
 test('handleMessage: should not throw error: null topic', () => {
   const handler = getHandler();
-  expect(() => handler.handleMessage(null, new Buffer('hello'))).not.toThrow();
+  expect(() => handler.handleMessage(null, Buffer.from('hello'))).not.toThrow();
 });
 
 test('handleMessage: should not throw error: empty topic', () => {
   const handler = getHandler();
-  expect(() => handler.handleMessage('', new Buffer('hello'))).not.toThrow();
+  expect(() => handler.handleMessage('', Buffer.from('hello'))).not.toThrow();
 });
 
 test('handleMessage: should not throw error: undefined message', () => {
