@@ -6,7 +6,7 @@
  *  @license  MIT
  */
 
-export { connect } from 'mqtt';
+export { connect } from 'async-mqtt';
 
 // errors
 export { EaseError } from './Error';

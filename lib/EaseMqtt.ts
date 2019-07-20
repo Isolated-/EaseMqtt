@@ -15,9 +15,9 @@ import { isEmpty, translateTopic, encode } from './Util';
 export class EaseMqtt extends EventEmitter2 implements IEaseMqtt {
 
   /**
-   *  @param {AsyncClient} client holds the configured MqttClient
+   *  @param {IMqttClient} client holds the configured MqttClient
    */
-  public client: AsyncClient;
+  public client: IMqttClient;
   /**
    *  @param {IEaseOption} option holds the collection of options
    */
