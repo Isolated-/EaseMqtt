@@ -6,7 +6,7 @@
     "declaration": true,
     "declarationDir": "./dist",
     "pretty": true,
-    "removeComments": true,
+    "removeComments": true
   },
   "include": [
     "./lib/**/*.ts"
