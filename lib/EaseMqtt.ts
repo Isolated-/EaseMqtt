@@ -18,6 +18,7 @@ export class EaseMqtt extends EventEmitter2 implements IEaseMqtt {
    *  @param {IMqttClient} client holds the configured MqttClient
    */
   public client: IMqttClient;
+  
   /**
    *  @param {IEaseOption} option holds the collection of options
    */
