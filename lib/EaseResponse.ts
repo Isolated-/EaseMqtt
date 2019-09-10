@@ -1,6 +1,6 @@
 import { IEaseRequest, IEaseResponse, IEaseMsg, EaseError } from '.';
 import { QoS } from 'mqtt';
-import { isEmpty, translateTopic } from './Util';
+import { isEmpty } from './Util';
 
 export class EaseResponse implements IEaseResponse {
   /**
