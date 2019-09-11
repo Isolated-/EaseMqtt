@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/Isolated-/EaseMqtt.svg?branch=master)](https://travis-ci.org/Isolated-/EaseMqtt)
 
-**NOTE**: This package was developed by myself, and myself only. Everyday I learn more about the forever growing world of technology, and specifically software development. I'd like to state that, I'm not a professional developer, I do make mistakes, however I encourage your critism as without it I cannot learn. If you see this message, and like to give me feedback you can email me: tectchco@gmail.com.
+**NOTE**: This package was developed by myself, and myself only. Everyday I learn more about the forever growing world of technology, and specifically software development. I'd like to state: I'm not a professional developer, I do make mistakes, however I encourage your critism as without it I cannot learn. If you see this message, and like to give me feedback you can email me: tectchco@gmail.com.
 
 *Version: **0.2.0-alpha***
 
