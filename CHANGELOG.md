@@ -4,7 +4,7 @@
 
 \*Version: **0.2.0-alpha\***
 
-# Version [0.2.0-alpha.1] - 2021-05-23
+# Version [0.2.1-build.0] - 2021-05-23
 
 ### Added
 
