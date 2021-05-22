@@ -6,6 +6,10 @@
 
 `EaseMqtt` provides a simple event-layer to simplify the development of Node.js services requiring MQTT communication. The package provides request/response pattern above publish/subscribe pattern provided by MQTT.
 
+# Note
+
+This package requires Node.js version 10+
+
 # Protocol
 
 MQTT provides a lightweight messaging protocol that uses a broker to send and recieve messages from other machines. You can view the full information [here](http://mqtt.org/).
