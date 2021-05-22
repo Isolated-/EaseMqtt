@@ -4,6 +4,16 @@
 
 \*Version: **0.2.0-alpha\***
 
+# Version [0.2.0-alpha.1] - 2021-05-23
+
+### Added
+
+1. Class: `EaseMessageTransporter` - responsible for transporting messages over MQTT using the MQTT client.
+
+### Improvements
+
+1. Class `EaseMqtt` has had methods `publish` and `subscribe` refactored into `EaseMessageTransporter` class, improving testing.
+
 # Version [0.2.0] - 2019-06-24
 
 ### Added

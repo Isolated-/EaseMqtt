@@ -52,7 +52,27 @@ export class EaseMessageTransporter implements IEaseMessageTransporter {
     }
   }
 
-  subscribe(topic: string | string[], qos?: QoS): Promise<void> {
-    throw new Error('Method not implemented.');
+  public async subscribe(topic: string | string[], qos?: QoS): Promise<void> {
+    if (isEmpty(this._client)) {
+      throw new EaseError(
+        'MqttClientUndefined',
+        'no mqtt client has been provided'
+      );
+    }
+
+    if (isEmpty(topic)) {
+      throw new EaseError('TopicNameEmpty', 'topic name is empty or too short');
+    }
+
+    const mqtt = this._client;
+    const delimiter = this._option.delimiter;
+    const opt = { qos: qos || this._option.qos };
+    const translatedTopic = translateTopic(topic, delimiter, '/');
+
+    try {
+      await mqtt.subscribe(translatedTopic, opt);
+    } catch (error) {
+      throw new EaseError(error.name, error.message);
+    }
   }
 }

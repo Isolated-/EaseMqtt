@@ -95,27 +95,7 @@ export class EaseMqtt extends EventEmitter2 implements IEaseMqtt {
    *  @param {QoS} qos override the default qos
    */
   public async subscribe(topic: string | string[], qos?: QoS): Promise<void> {
-    if (isEmpty(this.client)) {
-      throw new EaseError(
-        'MqttClientUndefined',
-        'no mqtt client has been provided'
-      );
-    }
-
-    if (isEmpty(topic)) {
-      throw new EaseError('TopicNameEmpty', 'topic name is empty or too short');
-    }
-
-    const mqtt = this.client;
-    const delimiter = this.option.delimiter;
-    const opt = { qos: qos || this.option.qos };
-    const translatedTopic = translateTopic(topic, delimiter, '/');
-
-    try {
-      await mqtt.subscribe(translatedTopic, opt);
-    } catch (error) {
-      throw new EaseError(error.name, error.message);
-    }
+    return this.transporter.subscribe(topic, qos);
   }
 
   /**

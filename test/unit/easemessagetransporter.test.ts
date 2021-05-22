@@ -1,5 +1,5 @@
 import { IMqttClient } from 'async-mqtt';
-import { IEaseMqtt } from '../../lib';
+import { EaseError, IEaseMqtt } from '../../lib';
 import { EaseMessageTransporter } from '../../lib/EaseMessageTransporter';
 import { encode } from '../../lib/Util';
 
@@ -9,6 +9,7 @@ describe('EaseMessageTransporter', () => {
   beforeEach(() => {
     client = {
       publish: () => undefined,
+      subscribe: () => undefined,
     } as any;
 
     instance = new EaseMessageTransporter(client);
@@ -94,6 +95,57 @@ describe('EaseMessageTransporter', () => {
       });
 
       expect(await transport.publish('some.topic', 'hello world')).toBe(5);
+    });
+  });
+
+  describe('when subscribing to a topic ...', () => {
+    test('throw an error if client is empty', () => {
+      let transport;
+
+      transport = new EaseMessageTransporter(undefined);
+      expect(transport.subscribe('some.topic')).rejects.toThrowError();
+
+      transport = new EaseMessageTransporter(null);
+      expect(transport.subscribe('some.topic')).rejects.toThrowError();
+    });
+
+    test('throw an error if topic is empty', () => {
+      expect(instance.subscribe('')).rejects.toThrowError();
+      expect(instance.subscribe(undefined)).rejects.toThrowError();
+      expect(instance.subscribe(null)).rejects.toThrowError();
+    });
+
+    test('should call _client.subscribe with correct params', async () => {
+      const mqtt = {
+        subscribe: jest.fn(async () => undefined),
+      };
+
+      const transport = new EaseMessageTransporter(mqtt as any, {
+        delimiter: '.',
+      });
+
+      await transport.subscribe('some.topic');
+      expect(mqtt.subscribe).toHaveBeenCalled();
+      expect(mqtt.subscribe).toHaveBeenCalledWith('some/topic', {
+        qos: undefined,
+      });
+    });
+
+    test('should throw EaseError on failure', async () => {
+      const mqtt = {
+        subscribe: jest.fn(async () => {
+          throw new Error();
+        }),
+      };
+
+      const transport = new EaseMessageTransporter(mqtt as any, {
+        delimiter: '.',
+      });
+
+      expect(transport.subscribe('some.topic')).rejects.toBeInstanceOf(
+        EaseError
+      );
+      expect(transport.subscribe('some.topic')).rejects.toThrowError();
     });
   });
 });
