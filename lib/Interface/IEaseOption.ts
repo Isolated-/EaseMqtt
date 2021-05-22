@@ -1,7 +1,6 @@
 import { QoS } from 'mqtt';
 
 export interface IEaseOption {
-
   /**
    *  @param {boolean} wildcard enable wildcard support? (default false)
    */
