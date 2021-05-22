@@ -8,7 +8,7 @@
 
 # Note
 
-This package requires Node.js version 10+
+This package requires Node.js version 10+.
 
 # Protocol
 
