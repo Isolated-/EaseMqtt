@@ -2,15 +2,9 @@
 
 [![Build Status](https://travis-ci.org/Isolated-/EaseMqtt.svg?branch=master)](https://travis-ci.org/Isolated-/EaseMqtt)
 
-**NOTE**: This package was developed by myself, and myself only. Everyday I learn more about the forever growing world of technology, and specifically software development. I'd like to state: I'm not a professional developer, I do make mistakes, however I encourage your critism as without it I cannot learn. If you see this message, and like to give me feedback you can email me: tectchco@gmail.com.
+\*Version: **0.2.0-alpha\***
 
-*Version: **0.2.0-alpha***
-
-`EaseMqtt` was developed out of the need of a sane approach to developing services that communicate using `MQTT`. This project will soon be cleaned up, and some areas re-developed. It's been removed from NPM and will be replaced with `EaseMqtt2`, this package will focus on removing any un-needed functionality and delivering only the essential functionality.
-
-# Introduction
-
-This package was originally `biggerworld-mqtt`, I've now open sourced this package and decided to move it to my personal account. Because of this I also made a number of changes and restarted the version to `0.1.0`.
+`EaseMqtt` provides a simple event-layer to simplify the development of Node.js services requiring MQTT communication. The package provides request/response pattern above publish/subscribe pattern provided by MQTT.
 
 # Protocol
 
@@ -56,11 +50,10 @@ easemqtt.subscribe('some.topic', 2); // topic, optional qos (default 1)
 easemqtt.publish('some.topic', 'hello world'); // topic(s), content (string/object)
 
 easemqtt.on('some.topic', (req, res) => {
-    const body = req.body;
-    const replyTo = req.replyTo;
-    
-    if (replyTo)
-        return res.reply('all done'); // string or object
+  const body = req.body;
+  const replyTo = req.replyTo;
+
+  if (replyTo) return res.reply('all done'); // string or object
 });
 ```
 
