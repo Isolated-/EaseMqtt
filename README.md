@@ -1,8 +1,8 @@
 # EaseMqtt
 
-[![Build Status](https://travis-ci.org/Isolated-/EaseMqtt.svg?branch=master)](https://travis-ci.org/Isolated-/EaseMqtt)
+[![CI - Node.js (v12)](https://github.com/Isolated-/EaseMqtt/actions/workflows/next_ci_12.yml/badge.svg)](https://github.com/Isolated-/EaseMqtt/actions/workflows/next_ci_12.yml)
 
-\*Version: **0.2.0-alpha\***
+- Current version: `v0.2.1-build.*`
 
 `EaseMqtt` provides a simple event-layer to simplify the development of Node.js services requiring MQTT communication. The package provides request/response pattern above publish/subscribe pattern provided by MQTT.
 
