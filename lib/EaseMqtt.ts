@@ -11,9 +11,10 @@ import {
 } from '.';
 
 import { isEmpty, translateTopic, encode } from './Util';
+import { IEaseMessageTransporter } from './Interface/Implementation/IEaseMessageTransporter';
+import { EaseMessageTransporter } from './EaseMessageTransporter';
 
 export class EaseMqtt extends EventEmitter2 implements IEaseMqtt {
-
   /**
    *  @param {AsyncClient} client holds the configured MqttClient
    */
@@ -28,12 +29,14 @@ export class EaseMqtt extends EventEmitter2 implements IEaseMqtt {
    */
   eventHandler: IEaseEventHandler;
 
+  transporter: IEaseMessageTransporter;
+
   /**
    *  Create the EaseMqtt instance
    *  @param {MqttClient} client a configured MqttClient
    *  @param {IEaseOption} opt optional option object
    */
-  constructor (client?: IMqttClient, opt?: IEaseOption) {
+  constructor(client?: IMqttClient, opt?: IEaseOption) {
     const option = opt || {};
     super({
       wildcard: option.wildcard || false,
@@ -53,6 +56,7 @@ export class EaseMqtt extends EventEmitter2 implements IEaseMqtt {
     }
 
     this.eventHandler = new EaseEventHandler(this);
+    this.transporter = new EaseMessageTransporter(this.client);
   }
 
   /**
@@ -60,7 +64,7 @@ export class EaseMqtt extends EventEmitter2 implements IEaseMqtt {
    *  @param {IEaseOption} opt an optional option object
    *  @return {IEaseOption} a defaulted object
    */
-  public getDefault (opt?: IEaseOption): IEaseOption {
+  public getDefault(opt?: IEaseOption): IEaseOption {
     const defaults: IEaseOption = {
       wildcard: false,
       delimiter: '.',
@@ -68,7 +72,7 @@ export class EaseMqtt extends EventEmitter2 implements IEaseMqtt {
       qos: 1,
     };
 
-    return { ... defaults, ... opt };
+    return { ...defaults, ...opt };
   }
 
   /**
@@ -77,29 +81,12 @@ export class EaseMqtt extends EventEmitter2 implements IEaseMqtt {
    *  @param {IEaseMessage} message the unencoded message content
    *  @param {QoS} qos override the default qos
    */
-  public async publish (topic: string | string[], message: IEaseMsg, qos?: QoS): Promise<number> {
-    if (isEmpty(this.client)) {
-      throw new EaseError('MqttClientUndefined', 'no mqtt client has been provided');
-    }
-
-    if (isEmpty(topic)) {
-      throw new EaseError('TopicNameEmpty', 'topic name is empty or too short');
-    }
-
-    if (isEmpty(message)) {
-      throw new EaseError('MessageContentEmpty', 'message content is empty or too short');
-    }
-
-    const mqtt = this.client;
-    const delimiter = this.option.delimiter;
-    const translatedTopic = translateTopic(topic, delimiter, '/') as string;
-
-    try {
-      await mqtt.publish(translatedTopic, encode(message), { qos });
-      return mqtt.getLastMessageId();
-    } catch (error) {
-      throw new EaseError(error.name, error.message);
-    }
+  public async publish(
+    topic: string | string[],
+    message: IEaseMsg,
+    qos?: QoS
+  ): Promise<number> {
+    return this.transporter.publish(topic, message, qos);
   }
 
   /**
@@ -107,25 +94,8 @@ export class EaseMqtt extends EventEmitter2 implements IEaseMqtt {
    *  @param {string | string[]} topic the topic(s) to listen for updates on
    *  @param {QoS} qos override the default qos
    */
-  public async subscribe (topic: string | string[], qos?: QoS): Promise<void> {
-    if (isEmpty(this.client)) {
-      throw new EaseError('MqttClientUndefined', 'no mqtt client has been provided');
-    }
-
-    if (isEmpty(topic)) {
-      throw new EaseError('TopicNameEmpty', 'topic name is empty or too short');
-    }
-
-    const mqtt = this.client;
-    const delimiter = this.option.delimiter;
-    const opt = { qos: qos || this.option.qos };
-    const translatedTopic = translateTopic(topic, delimiter, '/');
-
-    try {
-      await mqtt.subscribe(translatedTopic, opt);
-    } catch (error) {
-      throw new EaseError(error.name, error.message);
-    }
+  public async subscribe(topic: string | string[], qos?: QoS): Promise<void> {
+    return this.transporter.subscribe(topic, qos);
   }
 
   /**

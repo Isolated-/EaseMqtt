@@ -3,6 +3,16 @@
 [![Build Status](https://travis-ci.org/Isolated-/EaseMqtt.svg?branch=master)](https://travis-ci.org/Isolated-/EaseMqtt)
 
 \*Version: **0.2.0-alpha\***
+# Version [0.2.1-build.0] - 2021-05-23
+
+### Added
+
+1. Class: `EaseMessageTransporter` - responsible for transporting messages over MQTT using the MQTT client.
+
+### Improvements
+
+1. Class `EaseMqtt` has had methods `publish` and `subscribe` refactored into `EaseMessageTransporter` class, improving testing.
+
 
 # Version [0.2.0] - 2019-06-24
 
