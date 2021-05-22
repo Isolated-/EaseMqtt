@@ -96,6 +96,26 @@ describe('EaseMessageTransporter', () => {
 
       expect(await transport.publish('some.topic', 'hello world')).toBe(5);
     });
+
+    test('should throw EaseError on failure', async () => {
+      const mqtt = {
+        publish: jest.fn(async () => {
+          throw new Error();
+        }),
+      };
+
+      const transport = new EaseMessageTransporter(mqtt as any, {
+        delimiter: '.',
+      });
+
+      expect(
+        transport.publish('some.topic', 'hello world')
+      ).rejects.toBeInstanceOf(EaseError);
+
+      expect(
+        transport.publish('some.topic', 'hello world')
+      ).rejects.toThrowError();
+    });
   });
 
   describe('when subscribing to a topic ...', () => {
