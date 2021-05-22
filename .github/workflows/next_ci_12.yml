@@ -8,7 +8,7 @@ on:
     branches: [next]
 
   pull_request:
-    branches: [master, next]
+    branches: [next]
 
 jobs:
   build:
